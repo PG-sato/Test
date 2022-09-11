@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use App\Http\Requests\PostRequest;
 // use Illuminate\Http\Request;
 
@@ -16,10 +17,10 @@ class PostController extends Controller
 	{
 		return view('show')->with(['post' => $post]);
 	}
-	public function create()
-	{
-		return view('create');
-	}
+	// public function create()
+	// {
+	// 	return view('create');
+	// }
 	public function store(Post $post, PostRequest $request)
 	{
 		$input = $request['post'];
@@ -40,5 +41,9 @@ class PostController extends Controller
 	{
 		$post->delete();
 		return redirect('/');
+	}
+	public function create(Category $category)
+	{
+	    return view('posts/create')->with(['categories' => $category->get()]);;
 	}
 }
